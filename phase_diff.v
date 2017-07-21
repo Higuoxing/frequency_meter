@@ -160,7 +160,6 @@ module phase_diff(
     		buffer_done_cnt <= 32'd0;
     		buffer_done <= 1'b0;
     	end
-
     end
     
     // -- synchronize data
@@ -191,5 +190,5 @@ module phase_diff(
         end
         else phase_diff_cnt <= phase_diff_cnt;
     end
-
+    
 endmodule
