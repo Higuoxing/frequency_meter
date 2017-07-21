@@ -25,16 +25,14 @@ module phase_diff(
     input wire rst_n,
     input wire sig_in0,
     input wire sig_in1,
-    output reg [31:0] phase_diff_cnt,
-    output reg ref_clk_1_2Hz,
-    output reg phase_diff_detect,
     output reg [31:0] phase_diff_cnt_buf
     );
     
     parameter max_clk_1_2Hz_cnt = 100_000_000;
     reg [31:0] clk_1_2Hz_cnt;
-
-//    reg ref_clk_1_2Hz;
+	reg ref_clk_1_2Hz;
+	reg [31:0] phase_diff_cnt;
+	reg phase_diff_detect;
     
     // -- initialize var
     initial begin
@@ -42,6 +40,7 @@ module phase_diff(
         ref_clk_1_2Hz <= 1'b0;
         phase_diff_cnt <= 32'd0;
         phase_diff_cnt_buf <= 32'd0;
+        phase_diff_detect <= 1'b0;
     end
     
     // -- 0.5Hz refference clock generator
@@ -192,7 +191,5 @@ module phase_diff(
         end
         else phase_diff_cnt <= phase_diff_cnt;
     end
-    
-    
-    
+
 endmodule
