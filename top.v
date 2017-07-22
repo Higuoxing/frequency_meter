@@ -31,8 +31,6 @@ module top(
 	output wire [15:0] led
 	);
 	
-	
-	
 	wire [31:0] sig_freq_cnt_buf1;
 	wire [31:0] sig_freq_cnt_buf2;
 	wire [31:0] phase_diff_cnt_buf;
@@ -46,7 +44,7 @@ module top(
 	reg  cs_pos_detect_r1;
 	wire cs_pos_detect;
 	reg [5:0] data_cnt;
-	assign led[15:0] = sig_freq_cnt_buf1[15:0];
+	assign led[15:0] = sig_freq_cnt_buf2[15:0];
 	
 	initial begin
 		cs_pos_detect_r0 <= 1'b0;
@@ -146,7 +144,7 @@ module top(
     duty_cycle_meter duty_cycle_cnter(
     	.sys_clk(sys_clk),
     	.rst_n(rst_n),
-    	.sig_in(sig_in0),
+    	.sig_in(sig_in1),
     	.sig_in_high_cnt_buf(sig_in_high_cnt_buf),
     	.sig_in_low_cnt_buf(sig_in_low_cnt_buf)
     );

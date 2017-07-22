@@ -112,7 +112,7 @@ module duty_cycle_meter(
 	    end
 	end
 	
-    // -- sig_in posedge detect
+    // -- sig_in negedge detect
 	reg sig_in_neg_detect_r0 = 1'b0;
 	reg sig_in_neg_detect_r1 = 1'b0;
 	wire sig_in_neg_detect;
@@ -181,11 +181,11 @@ module duty_cycle_meter(
 			buffer_done <= 1'b0;
 			buffer_done_cnt <= 32'd0;
 		end
-		else if (!ref_clk_1_2Hz && buffer_done_cnt != 100) begin
+		else if (!ref_clk_1_2Hz && buffer_done_cnt != 10) begin
 			buffer_done_cnt <= buffer_done_cnt + 1;
 			buffer_done <= 1'b0;
 		end
-		else if (!ref_clk_1_2Hz && buffer_done_cnt == 100) begin
+		else if (!ref_clk_1_2Hz && buffer_done_cnt == 10) begin
 			buffer_done <= 1'b1;
 			buffer_done_cnt <= buffer_done_cnt;
 		end

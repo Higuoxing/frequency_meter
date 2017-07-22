@@ -148,11 +148,11 @@ module phase_diff(
     		buffer_done <= 1'b0;
     		buffer_done_cnt <= 32'd0;
     	end
-    	else if (!ref_clk_1_2Hz && buffer_done_cnt != 100) begin
+    	else if (!ref_clk_1_2Hz && buffer_done_cnt != 10) begin
     		buffer_done_cnt <= buffer_done_cnt + 1;
     		buffer_done <= 1'b0;
     	end
-    	else if (!ref_clk_1_2Hz && buffer_done_cnt == 100) begin
+    	else if (!ref_clk_1_2Hz && buffer_done_cnt == 10) begin
     		buffer_done <= 1'b1;
     		buffer_done_cnt <= buffer_done_cnt;
     	end
