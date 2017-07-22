@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module freq_counter(
+module freq_counter2(
 	input wire sys_clk,
 	input wire rst_n,
 	input wire sig_in,

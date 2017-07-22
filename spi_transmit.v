@@ -50,14 +50,14 @@ module spi_transmit(
        always@(posedge clk)
        if(!rst)
           delay_count<=0;
-       else if(delay_count==31'd19999)
+       else if(delay_count==31'd9999)
           delay_count<=0;
        else delay_count<=delay_count+1;
        
        always@(posedge clk)
        if(!rst)
           sck_reg<=0;
-       else if(delay_count==31'd19999)
+       else if(delay_count==31'd9999)
           sck_reg<= ~ sck_reg;
     
     //Generate SCK 

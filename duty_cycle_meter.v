@@ -28,7 +28,7 @@ module duty_cycle_meter(
 	output reg [31:0] sig_in_low_cnt_buf
 	);
 	
-	parameter max_clk_1_2Hz_cnt = 100_000_000;
+	parameter max_clk_1_2Hz_cnt = 100;
 	reg [31:0] clk_1_2Hz_cnt;
 	reg ref_clk_1_2Hz;
 	
@@ -181,11 +181,11 @@ module duty_cycle_meter(
 			buffer_done <= 1'b0;
 			buffer_done_cnt <= 32'd0;
 		end
-		else if (!ref_clk_1_2Hz && buffer_done_cnt != 10) begin
+		else if (!ref_clk_1_2Hz && buffer_done_cnt != 100) begin
 			buffer_done_cnt <= buffer_done_cnt + 1;
 			buffer_done <= 1'b0;
 		end
-		else if (!ref_clk_1_2Hz && buffer_done_cnt == 10) begin
+		else if (!ref_clk_1_2Hz && buffer_done_cnt == 100) begin
 			buffer_done <= 1'b1;
 			buffer_done_cnt <= buffer_done_cnt;
 		end

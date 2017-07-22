@@ -27,8 +27,11 @@ module top(
 	input  wire sig_in1,
 	output wire sck,
 	output wire miso,
-	output wire cs
+	output wire cs,
+	output wire [15:0] led
 	);
+	
+	
 	
 	wire [31:0] sig_freq_cnt_buf1;
 	wire [31:0] sig_freq_cnt_buf2;
@@ -43,6 +46,7 @@ module top(
 	reg  cs_pos_detect_r1;
 	wire cs_pos_detect;
 	reg [5:0] data_cnt;
+	assign led[15:0] = sig_freq_cnt_buf1[15:0];
 	
 	initial begin
 		cs_pos_detect_r0 <= 1'b0;
@@ -77,7 +81,7 @@ module top(
 		else data_cnt <= data_cnt;
 	end
 	
-	
+	assign send_data = {8'h55, 8'hAA, valid_data};
 	always @ (posedge sys_clk or negedge rst_n) begin
 		if (!rst_n) begin
 			spi_data_out <= 8'b0000_0000;
@@ -115,11 +119,11 @@ module top(
 						 sig_in_low_cnt_buf
 						 };
 	
-	assign send_data = {8'h55, 8'hAA, 160'h0123456789ABCDEFFFFF};
+
 	
 	freq_counter freq_cnter1(
 		.sys_clk(sys_clk),
-		.rst_n(rst_n),
+		.rst_n(1'b1),
 		.sig_in(sig_in0),
 		.sig_freq_cnt_buf(sig_freq_cnt_buf1)
 	);
