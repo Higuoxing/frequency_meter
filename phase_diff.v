@@ -28,7 +28,7 @@ module phase_diff(
     output reg [31:0] phase_diff_cnt_buf
     );
     
-    parameter max_clk_1_2Hz_cnt = 100_000_000;
+    parameter max_clk_1_2Hz_cnt = 399_999_999;
     reg [31:0] clk_1_2Hz_cnt;
 	reg ref_clk_1_2Hz;
 	reg [31:0] phase_diff_cnt;

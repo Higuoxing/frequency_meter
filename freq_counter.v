@@ -33,7 +33,7 @@ module freq_counter(
 //	output sig_in_pos_detect
     );
     
-    parameter max_clk_1_2Hz_cnt = 100_000_000;
+    parameter max_clk_1_2Hz_cnt = 399_999_999;
     
     reg [31:0] clk_1_2Hz_cnt;
     reg [31:0] sig_freq_cnt;
