@@ -21,7 +21,7 @@
 
 
 module top(
-	input  wire clk,
+	input  wire sys_clk,
 	input  wire rst_n,
 	input  wire sig_in0,
 	input  wire sig_in1,
@@ -30,7 +30,6 @@ module top(
 	output wire cs,
 	output wire [15:0] led
 	);
-	wire sys_clk;
 	wire [31:0] sig_freq_cnt_buf1;
 	wire [31:0] sig_freq_cnt_buf2;
 	wire [31:0] phase_diff_cnt_buf;
@@ -44,7 +43,7 @@ module top(
 	reg  cs_pos_detect_r1;
 	wire cs_pos_detect;
 	reg [5:0] data_cnt;
-	assign led[15:0] = sig_freq_cnt_buf2[15:0];
+	
 	
 	initial begin
 		cs_pos_detect_r0 <= 1'b0;
@@ -53,10 +52,6 @@ module top(
 		data_cnt <= 6'd0;
 	end
 	
-	clk_400M pll(
-		.clk_out1(sys_clk),
-		.clk_in1(clk)
-	);
 	// -- cs posedge detect
 	assign cs_pos_detect = (cs_pos_detect_r0 && 
 						!cs_pos_detect_r1) ? 1'b1: 1'b0;
@@ -114,10 +109,12 @@ module top(
 			default : spi_data_out <= send_data[175:168];
 		endcase
 	end
-	
+
+	wire [31:0] phase_diff_final;
+	assign phase_diff_final = {2'b00, phase_diff_cnt_buf[31:2]};
 	assign valid_data = {
 						 sig_freq_cnt_buf1, sig_freq_cnt_buf2, 
-						 phase_diff_cnt_buf, sig_in_high_cnt_buf, 
+						 phase_diff_final, sig_in_high_cnt_buf, 
 						 sig_in_low_cnt_buf
 						 };
 	
@@ -166,6 +163,17 @@ module top(
     );
     
 endmodule
+
+//module bin_to_seg(
+//    input wire clk,
+//    input wire rst_n,
+//    input wire [3:0] in1,
+//    input wire [3:0] in2,
+//    input wire [3:0] in3,
+//    input wire [3:0] in4,
+//    output reg [6:0] seg,
+//    output reg [3:0] wela
+//    );
 
 //			1	: spi_data_out <= send_data	[175:168];
 //			2 	: spi_data_out <= send_data	[167:160];
