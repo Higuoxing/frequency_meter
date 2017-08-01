@@ -160,7 +160,7 @@ module FREQ_meter(
         if (!rst_n) begin
             real_gate <= 1'b0;
         end
-        if (ref_gate_pos_detect) begin
+        else if (ref_gate_pos_detect) begin
             real_gate <= 1'b1;
         end
         else if (!ref_gate && sig_in_pos_detect) begin
