@@ -20,15 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module FREQ_counter(
-    input wire sys_clk,
+module FREQ_meter(
+    input wire sys_clk,          // -- sys_clk = 200MHz
     input wire rst_n,
     input wire sig_in,
     output reg [31:0] sig_freq_cnt_buf,
     output reg [31:0] ref_clk_cnt_buf
     );
     
-    parameter max_ref_gate_cnt = 50;
+    parameter max_ref_gate_cnt = 199_999_999;
     parameter max_ref_clk_100MHz_cnt = 0;
     
     reg [31:0] ref_gate_cnt;
@@ -237,4 +237,4 @@ module FREQ_counter(
         end
     end
     
-endmodule   
+endmodule
